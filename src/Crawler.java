@@ -1,9 +1,14 @@
+package de.vogella.regex.test;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.HttpURLConnection;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Crawler {
 
@@ -57,4 +62,21 @@ public class Crawler {
 		this.url = url;
 	}
 
+	private void parseURL(){
+		Pattern link;
+		Pattern htmltag;
+		cont=this.rawContents;
+		String s = "This is my test <a href='Can you find me?'> </a>";
+		htmltag = Pattern.compile("<a//b[^>]*href= \"[^>]*>(.*?)</a>");
+		link = Pattern.compile("href=\"[^>]*\">");
+		
+		Matcher tagmatch = htmltag.matcher(cont);
+		while(tagmatch.find()){
+			Matcher matcher = link.matcher(tagmatch.group());
+			matcher.find();
+			urlSet.add(makeAbsolute(url,link));
+		}
+		
+	}
+	
 }
