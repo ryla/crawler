@@ -31,8 +31,8 @@ public class Crawler {
 			InputStream in = conn.getInputStream();
 			int value = in.read();
 			while (value != -1){
-				value = in.read();
 				this.rawContents += (char) value;
+				value = in.read();
 			}
 		} catch (IOException e) {
 			this.rawContents = "";
