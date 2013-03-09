@@ -39,7 +39,6 @@ public class Crawler {
 		} finally {
 			conn.disconnect();
 		}
-		System.out.print(this.rawContents);
 	}
 	
 	public Set<URL> getURLSet() {
