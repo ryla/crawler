@@ -1,12 +1,13 @@
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 public class Crawler {
 
 	private String contents;
 	private String rawContents;
 	private URL url;
-	private ArrayList<URL> urlList;
+	private HashSet<URL> urlSet;
 
 	public Crawler() {
 		this(null);
@@ -16,11 +17,11 @@ public class Crawler {
 		this.contents = "";
 		this.rawContents = "";
 		this.url = url;
-		this.urlList = new ArrayList<URL>();
+		this.urlSet = new HashSet<URL>();
 	}
 	
-	public ArrayList<URL> getURLList() {
-		return urlList;
+	public Set<URL> getURLSet() {
+		return urlSet;
 	}
 	
 	public String getContents() {
