@@ -1,10 +1,16 @@
 import java.net.URL;
+import java.util.ArrayList;
 
 public class Crawler {
 
 	private String contents;
 	private URL url;
+	private ArrayList<URL> urlList;
 	
+	public ArrayList<URL> getURLList() {
+		return urlList;
+	}
+
 	public Crawler() {
 		this.contents = "";
 		this.url = null;
