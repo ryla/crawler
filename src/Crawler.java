@@ -1,6 +1,8 @@
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashSet;
@@ -26,14 +28,15 @@ public class Crawler {
 	
 	public void fetch() {
 		HttpURLConnection conn = null;
+		BufferedReader reader = null;
 		try {
 			conn = (HttpURLConnection) this.url.openConnection();
 			conn.connect();
-			InputStream in = (BufferedInputStream) conn.getInputStream();
-			int value = in.read();
+			reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			int value = reader.read();
 			while (value != -1){
 				this.rawContents += (char) value;
-				value = in.read();
+				value = reader.read();
 			}
 		} catch (IOException e) {
 			this.rawContents = "";
