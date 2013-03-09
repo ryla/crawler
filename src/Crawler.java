@@ -7,10 +7,6 @@ public class Crawler {
 	private String rawContents;
 	private URL url;
 	private ArrayList<URL> urlList;
-	
-	public ArrayList<URL> getURLList() {
-		return urlList;
-	}
 
 	public Crawler() {
 		this(null);
@@ -21,6 +17,10 @@ public class Crawler {
 		this.rawContents = "";
 		this.url = url;
 		this.urlList = new ArrayList<URL>();
+	}
+	
+	public ArrayList<URL> getURLList() {
+		return urlList;
 	}
 	
 	public String getContents() {
