@@ -1,9 +1,10 @@
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.net.HttpURLConnection;
-import java.util.Set;
+import java.net.URL;
 import java.util.HashSet;
+import java.util.Set;
 
 public class Crawler {
 
@@ -28,7 +29,7 @@ public class Crawler {
 		try {
 			conn = (HttpURLConnection) this.url.openConnection();
 			conn.connect();
-			InputStream in = conn.getInputStream();
+			InputStream in = (BufferedInputStream) conn.getInputStream();
 			int value = in.read();
 			while (value != -1){
 				this.rawContents += (char) value;
