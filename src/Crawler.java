@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Crawler {
 
 	private String contents;
+	private String rawContents;
 	private URL url;
 	private ArrayList<URL> urlList;
 	
@@ -12,21 +13,24 @@ public class Crawler {
 	}
 
 	public Crawler() {
-		this.contents = "";
-		this.url = null;
+		this(null);
 	}
 	
 	public Crawler(URL url) {
 		this.contents = "";
-		this.setURL(url);
+		this.rawContents = "";
+		this.url = url;
+		this.urlList = new ArrayList<URL>();
 	}
 	
 	public String getContents() {
 		return contents;
 	}
+	
 	public URL getURL() {
 		return url;
 	}
+	
 	public void setURL(URL url) {
 		this.url = url;
 	}
