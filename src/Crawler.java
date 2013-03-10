@@ -1,14 +1,23 @@
+<<<<<<< HEAD
 package de.vogella.regex.test;
 
+=======
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+>>>>>>> 374bb03edcc48478e179ec9f05885cf3e88f87e1
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.util.Set;
+import java.net.URL;
 import java.util.HashSet;
+<<<<<<< HEAD
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+=======
+import java.util.Set;
+>>>>>>> 374bb03edcc48478e179ec9f05885cf3e88f87e1
 
 public class Crawler {
 
@@ -30,14 +39,15 @@ public class Crawler {
 	
 	public void fetch() {
 		HttpURLConnection conn = null;
+		BufferedReader reader = null;
 		try {
 			conn = (HttpURLConnection) this.url.openConnection();
 			conn.connect();
-			InputStream in = conn.getInputStream();
-			int value = in.read();
+			reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			int value = reader.read();
 			while (value != -1){
-				value = in.read();
 				this.rawContents += (char) value;
+				value = reader.read();
 			}
 		} catch (IOException e) {
 			this.rawContents = "";
@@ -62,21 +72,6 @@ public class Crawler {
 		this.url = url;
 	}
 
-	private void parseURL(){
-		Pattern link;
-		Pattern htmltag;
-		cont=this.rawContents;
-		String s = "This is my test <a href='Can you find me?'> </a>";
-		htmltag = Pattern.compile("<a//b[^>]*href= \"[^>]*>(.*?)</a>");
-		link = Pattern.compile("href=\"[^>]*\">");
-		
-		Matcher tagmatch = htmltag.matcher(cont);
-		while(tagmatch.find()){
-			Matcher matcher = link.matcher(tagmatch.group());
-			matcher.find();
-			urlSet.add(makeAbsolute(url,link));
-		}
-		
-	}
+	
 	
 }
