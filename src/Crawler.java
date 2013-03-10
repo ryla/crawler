@@ -51,7 +51,7 @@ public class Crawler {
 	}
 	
 	public String getContents() {
-		nonRawContents();
+		parseContents();
 		return contents;
 	}
 	
@@ -85,7 +85,7 @@ public class Crawler {
 		}
 		
 	}
-	private void nonRawContents(){
+	private void parseContents(){
 		//String input = "<asdf>t es t<asdf><asdfa sdf>as.!?aaa d<as><><A>";
 		Pattern p = Pattern.compile("(<.*?>)");
 		Matcher n = p.matcher(rawContents);
