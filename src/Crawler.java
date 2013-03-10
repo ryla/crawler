@@ -61,6 +61,11 @@ public class Crawler {
 	public void setURL(URL url) {
 		this.url = url;
 	}
+	
+	public String getRawContents() {
+		return this.rawContents;
+	}
+	
 	private void parseURL() throws MalformedURLException{
 		Pattern link;
 		Pattern htmltag;
