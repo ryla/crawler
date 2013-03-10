@@ -45,7 +45,7 @@ public class CrawlerTest {
 	@Test
 	public void contentsTest() {
 		Crawler c = crawlerBuilder();
-		String exp = "Test Page Test Page This is a test HTML page for Crawler. Click here to go to its Github repo.";
+		String exp = " Test Page Test Page This is a test HTML page for Crawler. Click here to go to its Github repo. ";
 		assertEquals(exp, c.getContents());
 	}
 	
@@ -65,10 +65,4 @@ public class CrawlerTest {
 		return null;
 	}
 	
-	@Test
-	public void nonRaw(){
-		Crawler c = new Crawler();
-		assertEquals(c.getContents(), " t es t  as.!?aaa d   ");
-	}
-
 }
