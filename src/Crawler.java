@@ -66,7 +66,7 @@ public class Crawler {
 		return this.rawContents;
 	}
 	
-	private void parseURL() throws MalformedURLException{
+	private void parseURL(){
 		Pattern link;
 		Pattern htmltag;
 		String cont=this.rawContents;
@@ -78,7 +78,9 @@ public class Crawler {
 		while(tagmatch.find()){
 			Matcher matcher = link.matcher(tagmatch.group());
 			matcher.find();
-			this.urlSet.add(new URL(this.url,link.toString()));
+			try {
+				this.urlSet.add(new URL(this.url, link.toString()));
+			} catch (MalformedURLException e) { }
 		}
 		
 	}
