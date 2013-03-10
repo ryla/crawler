@@ -42,6 +42,13 @@ public class CrawlerTest {
 		}
 	}
 	
+	@Test
+	public void contentsTest() {
+		Crawler c = crawlerBuilder();
+		String exp = "Test Page Test Page This is a test HTML page for Crawler. Click here to go to its Github repo.";
+		assertEquals(exp, c.getContents());
+	}
+	
 	public Crawler crawlerBuilder() {
 		return crawlerBuilder("https://raw.github.com/ryla/crawler/master/test.html");
 	}
