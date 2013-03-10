@@ -13,7 +13,7 @@ public class CrawlerTest {
 
 	@Test
 	public void rawTest() {
-		Crawler c = crawlerBuilder("https://raw.github.com/ryla/crawler/master/test.html");
+		Crawler c = crawlerBuilder();
 		try {
 			FileReader f = new FileReader("test.html");
 			String s = "";
@@ -29,6 +29,21 @@ public class CrawlerTest {
 		} catch (IOException e) {
 			fail("IO Error");
 		}
+	}
+	
+	@Test
+	public void urlTest() {
+		Crawler c = crawlerBuilder();
+		assertEquals(1, c.getURLSet().size());
+		try {
+			assertTrue(c.getURLSet().contains(new URL("https://github.com/ryla/crawler")));
+		} catch (MalformedURLException e) {
+			fail("Malformed URL");
+		}
+	}
+	
+	public Crawler crawlerBuilder() {
+		return crawlerBuilder("https://raw.github.com/ryla/crawler/master/test.html");
 	}
 	
 	public Crawler crawlerBuilder(String url) {
