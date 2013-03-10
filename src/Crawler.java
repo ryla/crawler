@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
@@ -60,10 +61,10 @@ public class Crawler {
 	public void setURL(URL url) {
 		this.url = url;
 	}
-	private void parseURL(){
+	private void parseURL() throws MalformedURLException{
 		Pattern link;
 		Pattern htmltag;
-		cont=this.rawContents;
+		String cont=this.rawContents;
 		String s = "This is my test <a href='Can you find me?'> </a>";
 		htmltag = Pattern.compile("<a//b[^>]*href= \"[^>]*>(.*?)</a>");
 		link = Pattern.compile("href=\"[^>]*\">");
@@ -72,7 +73,7 @@ public class Crawler {
 		while(tagmatch.find()){
 			Matcher matcher = link.matcher(tagmatch.group());
 			matcher.find();
-			urlSet.add(makeAbsolute(url,link));
+			this.urlSet.add(new URL(this.url,link.toString()));
 		}
 		
 	}
