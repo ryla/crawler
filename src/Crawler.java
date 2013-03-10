@@ -1,23 +1,12 @@
-<<<<<<< HEAD
-package de.vogella.regex.test;
-
-=======
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
->>>>>>> 374bb03edcc48478e179ec9f05885cf3e88f87e1
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashSet;
-<<<<<<< HEAD
-import java.util.Scanner;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-=======
-import java.util.Set;
->>>>>>> 374bb03edcc48478e179ec9f05885cf3e88f87e1
 
 public class Crawler {
 
