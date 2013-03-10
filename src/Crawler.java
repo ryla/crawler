@@ -51,6 +51,7 @@ public class Crawler {
 	}
 	
 	public String getContents() {
+		nonRawContents();
 		return contents;
 	}
 	
@@ -82,6 +83,13 @@ public class Crawler {
 				this.urlSet.add(new URL(this.url, link.toString()));
 			} catch (MalformedURLException e) { }
 		}
+		
+	}
+	private void nonRawContents(){
+		String input = "<asdf>t es t<asdf><asdfa sdf>as.!?aaa d<as><><A>";
+		Pattern p = Pattern.compile("(<.*?>)");
+		Matcher n = p.matcher(input);
+		contents = n.replaceAll(" ");
 		
 	}
 	

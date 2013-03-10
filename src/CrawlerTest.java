@@ -64,5 +64,11 @@ public class CrawlerTest {
 		}
 		return null;
 	}
+	
+	@Test
+	public void nonRaw(){
+		Crawler c = new Crawler();
+		assertEquals(c.getContents(), " t es t  as.!?aaa d   ");
+	}
 
 }
