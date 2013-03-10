@@ -71,7 +71,22 @@ public class Crawler {
 	public void setURL(URL url) {
 		this.url = url;
 	}
-
+	private void parseURL(){
+		Pattern link;
+		Pattern htmltag;
+		cont=this.rawContents;
+		String s = "This is my test <a href='Can you find me?'> </a>";
+		htmltag = Pattern.compile("<a//b[^>]*href= \"[^>]*>(.*?)</a>");
+		link = Pattern.compile("href=\"[^>]*\">");
+		
+		Matcher tagmatch = htmltag.matcher(cont);
+		while(tagmatch.find()){
+			Matcher matcher = link.matcher(tagmatch.group());
+			matcher.find();
+			urlSet.add(makeAbsolute(url,link));
+		}
+		
+	}
 	
 	
 }
