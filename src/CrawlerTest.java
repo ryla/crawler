@@ -12,13 +12,10 @@ import org.junit.Test;
 public class CrawlerTest {
 
 	@Test
-	public void fetchTest() {
-		FileReader f = null;
+	public void rawTest() {
+		Crawler c = crawlerBuilder("https://raw.github.com/ryla/crawler/master/test.html");
 		try {
-			URL u = new URL("https://raw.github.com/ryla/crawler/master/test.html");
-			Crawler c = new Crawler(u);
-			c.fetch();
-			f = new FileReader("test.html");
+			FileReader f = new FileReader("test.html");
 			String s = "";
 			int i = f.read();
 			while (i != -1) {
@@ -27,13 +24,23 @@ public class CrawlerTest {
 			}
 			f.close();
 			assertEquals(s, c.getRawContents());
-		} catch (MalformedURLException e) {
-			fail("Malformed URL");
 		} catch (FileNotFoundException e) {
 			fail("File Not Found");
 		} catch (IOException e) {
 			fail("IO Error");
 		}
+	}
+	
+	public Crawler crawlerBuilder(String url) {
+		try {
+			URL u = new URL(url);
+			Crawler c = new Crawler(u);
+			c.fetch();
+			return c;
+		} catch (MalformedURLException e) {
+			fail("Malformed URL");
+		}
+		return null;
 	}
 
 }
