@@ -49,6 +49,7 @@ public class Crawler {
 	}
 	
 	public Set<URL> getURLSet() {
+		parseURL();
 		return urlSet;
 	}
 	
@@ -69,26 +70,22 @@ public class Crawler {
 		return this.rawContents;
 	}
 	
-	private List<String> parseURL(){
-		List<String> links = new ArrayList<String>();
-		
+	private void parseURL(){		
 		String cont=this.rawContents;
 		Pattern pattern = Pattern.compile("<a\\b[^>]*href=\"[^>]*>(.*?)</a>");
 		Pattern link = Pattern.compile("href=\'[^>]*\'>");
 		Matcher matcher = pattern.matcher(cont);
 		Matcher tagmatch = pattern.matcher(cont);
-		String url;
 		
 		while (tagmatch.find()) {
 			Matcher match = link.matcher(tagmatch.group());
 			matcher.find();
 			String lin = matcher.group().replaceFirst("href=\"", "")
 			.replaceFirst("\">", "");
-			if (valid(link)) {
-				links.add(makeAbsolute(url, link));
-			}
+			try {
+				urlSet.add(new URL(url, link.toString()));
+			} catch (MalformedURLException e) { }
 		}
-		return links;
 	}
 
 	private void parseContents(){
