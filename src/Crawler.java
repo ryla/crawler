@@ -4,7 +4,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -67,7 +69,7 @@ public class Crawler {
 		return this.rawContents;
 	}
 	
-	private void parseURL(){
+	private List<String> parseURL(){
 		List<String> links = new ArrayList<String>();
 		
 		String cont=this.rawContents;
@@ -78,15 +80,15 @@ public class Crawler {
 		String url;
 		
 		while (tagmatch.find()) {
-		Matcher match = link.matcher(tagmatch.group());
-		matcher.find();
-		String lin = matcher.group().replaceFirst("href=\"", "")
-		   .replaceFirst("\">", "");
-		if (valid(link)) {
-		    links.add(makeAbsolute(url, link));
+			Matcher match = link.matcher(tagmatch.group());
+			matcher.find();
+			String lin = matcher.group().replaceFirst("href=\"", "")
+			.replaceFirst("\">", "");
+			if (valid(link)) {
+				links.add(makeAbsolute(url, link));
+			}
 		}
-		  
-		    return links;
+		return links;
 	}
 
 	private void parseContents(){
