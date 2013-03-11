@@ -68,23 +68,27 @@ public class Crawler {
 	}
 	
 	private void parseURL(){
-		Pattern link;
-		Pattern htmltag;
+		List<String> links = new ArrayList<String>();
+		
 		String cont=this.rawContents;
-		String s = "This is my test <a href='Can you find me?'> </a>";
-		htmltag = Pattern.compile("<a//b[^>]*href= \"[^>]*>(.*?)</a>");
-		link = Pattern.compile("href=\"[^>]*\">");
+		Pattern pattern = Pattern.compile("<a\\b[^>]*href=\"[^>]*>(.*?)</a>");
+		Pattern link = Pattern.compile("href=\'[^>]*\'>");
+		Matcher matcher = pattern.matcher(cont);
+		Matcher tagmatch = pattern.matcher(cont);
+		String url;
 		
-		Matcher tagmatch = htmltag.matcher(cont);
-		while(tagmatch.find()){
-			Matcher matcher = link.matcher(tagmatch.group());
-			matcher.find();
-			try {
-				this.urlSet.add(new URL(this.url, link.toString()));
-			} catch (MalformedURLException e) { }
+		while (tagmatch.find()) {
+		Matcher match = link.matcher(tagmatch.group());
+		matcher.find();
+		String lin = matcher.group().replaceFirst("href=\"", "")
+		   .replaceFirst("\">", "");
+		if (valid(link)) {
+		    links.add(makeAbsolute(url, link));
 		}
-		
+		  
+		    return links;
 	}
+
 	private void parseContents(){
 		//String input = "<asdf>t es t<asdf><asdfa sdf>as.!?aaa d<as><><A>";
 		Pattern p = Pattern.compile("(<.*?>)");
