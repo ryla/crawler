@@ -93,7 +93,7 @@ public class Crawler {
 
 	private void parseContents(){
 		//String input = "<asdf>t es t<asdf><asdfa sdf>as.!?aaa d<as><><A>";
-		Pattern p = Pattern.compile("(<.*?>)");
+		Pattern p = Pattern.compile("<.*?>");
 		Matcher n = p.matcher(rawContents);
 		String a = n.replaceAll(" ");
 		Pattern b = Pattern.compile("\\s+");
